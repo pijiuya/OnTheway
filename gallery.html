@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片画廊</title>
+    <style>
+        .gallery-img {
+            position: relative;
+            width: 800px;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gallery"></div>
+
+    <script>
+        fetch('imageList.json')
+            .then(response => response.json())
+            .then(images => {
+                const gallery = document.getElementById('gallery');
+
+                images.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `images/${image}`;
+                    imgElement.className = 'gallery-img';
+                    gallery.appendChild(imgElement);
+                });
+            })
+            .catch(error => console.error('加载图片列表时发生错误: ', error));
+    </script>
+</body>
+</html>
